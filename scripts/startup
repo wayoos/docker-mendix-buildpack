@@ -81,15 +81,14 @@ def export_k8s_instance():
                 .format(instance_number, hostname))
             os.environ['CF_INSTANCE_INDEX'] = instance_number
 
-def export_dd_hostname():
+def export_dd_tags():
     logging.debug("Checking if Datadog is enabled...")
     dd_api_key = os.environ.get('DD_API_KEY')
     if dd_api_key is not None:
-        dd_hostname = os.environ.get('DD_HOSTNAME')
-        if dd_hostname is None:
-            hostname = os.environ.get('HOSTNAME')
-            os.environ['DD_HOSTNAME'] = os.environ.get('HOSTNAME')
-          
+        dd_tags = os.environ.get('DD_TAGS')
+        if dd_tags is not None:
+            os.environ['DD_TAGS'] = json.dumps('{'+ dd_tags + '}')
+            
 def export_encoded_cacertificates():
     logging.debug("Checking for encoded CA certificates...")
     certificate_authorities_base64 = os.environ.get('CERTIFICATE_AUTHORITIES_BASE64')
@@ -130,7 +129,7 @@ if __name__ == '__main__':
     logging.info(get_welcome_header())
     export_vcap_variables()
     export_k8s_instance()
-    export_dd_hostname()
+    export_dd_tags()
     export_encoded_cacertificates()
     call_builpack_startup()
     sys.exit(0)
