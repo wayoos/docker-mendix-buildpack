@@ -129,7 +129,7 @@ if __name__ == '__main__':
     logging.info(get_welcome_header())
     export_vcap_variables()
     export_k8s_instance()
-    export_dd_tags()
+    #export_dd_tags()
     export_encoded_cacertificates()
     call_builpack_startup()
     sys.exit(0)
