@@ -9,6 +9,7 @@ LABEL maintainer="digitalecosystems@mendix.com"
 
 # Build-time variables
 ARG BUILD_PATH=project
+ARG DD_API_KEY
 
 # Checkout CF Build-pack here
 RUN mkdir -p buildpack/.local && \
@@ -28,7 +29,7 @@ COPY $BUILD_PATH build
 # Compile the application source code and remove temp files
 WORKDIR /buildpack
 RUN "/buildpack/compilation" /build /cache && \
-  rm -fr /cache /tmp/javasdk /tmp/opt
+  rm -fr /cache /tmp/javasdk /build/.local/usr/lib/jvm/jdk-* /usr/share/doc/* /tmp/opt/mono-*
 
 # Expose nginx port
 ENV PORT 80
