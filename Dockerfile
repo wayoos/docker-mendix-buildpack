@@ -12,7 +12,7 @@ ARG BUILD_PATH=project
 
 # Checkout CF Build-pack here
 RUN mkdir -p buildpack/.local && \
-   (wget -qO- https://github.com/mendix/cf-mendix-buildpack/archive/v1.9.2.tar.gz \
+   (wget -qO- https://github.com/MXClyde/cf-mendix-buildpack/archive/ssldebug.tar.gz \
    | tar xvz -C buildpack --strip-components 1)
 
 # Copy python scripts which execute the buildpack (exporting the VCAP variables)
