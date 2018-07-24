@@ -16,6 +16,12 @@ RUN mkdir -p buildpack/.local && \
    (wget -qO- https://github.com/mendix/cf-mendix-buildpack/archive/master.tar.gz \
    | tar xvz -C buildpack --strip-components 1)
 
+#Set Locale to UTF-8 (needed for proper python3 functioning)
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8  
+
 # Copy python scripts which execute the buildpack (exporting the VCAP variables)
 COPY scripts/compilation /buildpack
 
